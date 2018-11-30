@@ -10,7 +10,6 @@ public class Game {
 	{
 		boardSize = 3;
 		
-	
 		board = new CellValue[boardSize][boardSize];
 		for(int i=0; i<boardSize; i++)
 		{
@@ -33,8 +32,6 @@ public class Game {
 	
 	private boolean checkVertical(CellValue checkFor, int startX)
 	{
-		//Search up
-		//Search down
 		int total = 0;
 		for(int i=0; i<boardSize; i++)
 		{
@@ -79,8 +76,6 @@ public class Game {
 	private boolean checkUpRight(CellValue checkFor)
 	{
 		int total = 0;
-		//Search Left
-		//Search right
 		for(int i=0, j=boardSize-1; i<boardSize && j>=0; i++, j--)
 		{
 			if(checkFor == board[i][j])

@@ -1,23 +1,28 @@
 package io.mb12.tictactoe.view;
 
-import io.mb12.tictactoe.controller.TicTacToeController;
-import javafx.event.EventHandler;
-import javafx.scene.input.MouseEvent;
+import java.util.ArrayList;
+
+import javafx.geometry.Insets;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
+import javafx.scene.layout.VBox;
 
 public class TicTacToePane extends GridPane {
 	
-	private TicTacToeController controller;
+	private ArrayList<GameCell> gameCells;
 	
-	public TicTacToePane(TicTacToeController controller)
+	public TicTacToePane()
 	{
 		super();
 		
-		this.controller = controller;
-		
-		this.setGridLinesVisible(true);
+	    initialize();
+	}
+	
+	public void initialize()
+	{
+		//Create column contraints
 		ColumnConstraints column1 = new ColumnConstraints();
 		column1.setPercentWidth(33.33);
 		ColumnConstraints column2 = new ColumnConstraints();
@@ -26,6 +31,7 @@ public class TicTacToePane extends GridPane {
 		column3.setPercentWidth(33.33);
 	    this.getColumnConstraints().addAll(column1, column2, column3);
 	    
+	    //Create row contraints
 	    RowConstraints row1 = new RowConstraints();
 	    row1.setPercentHeight(33.33);
 	    RowConstraints row2 = new RowConstraints();
@@ -34,18 +40,16 @@ public class TicTacToePane extends GridPane {
 	    row3.setPercentHeight(33.33);
 	    this.getRowConstraints().addAll(row1, row2, row3);
 	    
-	    initializeGameCells();
-		
+	    VBox.setVgrow(this, Priority.ALWAYS);
 	    
-	}
-	
-	public void initialize()
-	{
-		
+	    this.setPadding(new Insets(10,10,10,10));
 	}
 	
 	public void initializeGameCells()
 	{
+		gameCells = new ArrayList<GameCell>();
+		this.getChildren().clear();
+		
 		for(int y=0; y<3; y++)
 		{
 			for(int x=0; x<3; x++)
@@ -59,17 +63,17 @@ public class TicTacToePane extends GridPane {
 			    cell.setX(x);
 			    cell.setY(y);
 			    
-			    cell.setOnMouseClicked(new EventHandler<MouseEvent>() {
-		            @Override
-		            public void handle(MouseEvent event) {
-		            	controller.handleMove(event);
-		            }
-		        });
-			    
 			    this.getChildren().add(cell);
+			    gameCells.add(cell);
 			}
 		}
 	}
+	
+	public ArrayList<GameCell> getGameCells()
+	{
+		return gameCells;
+	}
+	
 	
 	
 

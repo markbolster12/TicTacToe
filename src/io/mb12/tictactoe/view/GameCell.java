@@ -19,44 +19,22 @@ public class GameCell extends StackPane{
 	{
 		super();
 		
-		c = new Circle(50);
-		c.setFill(null);
-		c.setStroke(Color.BLACK);
-		c.setStrokeWidth(5);
-		
-		sq = new Rectangle(100,100);
-		sq.setFill(null);
-		sq.setStroke(Color.BLACK);
-		sq.setStrokeWidth(5);
-		
 		this.setStyle("-fx-border-color: black");
-		
-//		this.setOnMouseClicked(new EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle(MouseEvent event) {
-//                toggleSelected();
-//            }
-//        });
-		
 		this.setSelected(CellValue.EMPTY);
 	}
 	
-	
+	//TODO Can move this logic to a controller
 	public void setSelected(CellValue val)
 	{
 		if(val == CellValue.SQUARE)
 		{
-			displayShape = sq;
 			this.getChildren().clear();
-			this.getChildren().add(displayShape);
-			//this.setBackground(new Background(new BackgroundFill(Color.BLUE, CornerRadii.EMPTY, Insets.EMPTY)));
+			this.getChildren().add(new SquareSymbol());
 		}
 		else if(val == CellValue.CIRCLE)
 		{
-			displayShape = c;
 			this.getChildren().clear();
-			this.getChildren().add(displayShape);
-			//this.setBackground(new Background(new BackgroundFill(Color.RED, CornerRadii.EMPTY, Insets.EMPTY)));
+			this.getChildren().add(new CircleSymbol());
 		}
 		else
 		{
