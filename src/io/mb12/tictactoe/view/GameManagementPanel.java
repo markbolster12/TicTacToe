@@ -1,10 +1,8 @@
 package io.mb12.tictactoe.view;
 
-import io.mb12.tictactoe.model.TicTacToeAppModel;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 
 public class GameManagementPanel extends HBox{

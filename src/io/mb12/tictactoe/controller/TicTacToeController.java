@@ -7,14 +7,20 @@ import io.mb12.tictactoe.model.Player;
 import io.mb12.tictactoe.model.TicTacToeAppModel;
 import io.mb12.tictactoe.view.GameCell;
 import io.mb12.tictactoe.view.TicTacToePane;
+import io.mb12.tictactoe.view.WinnerView;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 public class TicTacToeController {
@@ -37,7 +43,6 @@ public class TicTacToeController {
 	public TicTacToeController(TicTacToeAppModel model)
 	{
 		appModel = model;
-		
 		
 		initialize();
 
@@ -105,13 +110,14 @@ public class TicTacToeController {
 		endTurn();
 	}
 	
+	//TODO consider moving winnerView ID to static string 
 	protected void handleWinnerFound()
 	{
-		System.out.println("Winner!");
-		StackPane winnerView = new StackPane();
-		Text winnerText = new Text("Winner! " + appModel.getCurrentPlayer().getLabel());
-		winnerView.getChildren().add(winnerText);
-		winnerView.setId("winnerView");
+		//System.out.println("Winner!");
+		
+		WinnerView winnerView = new WinnerView();
+		
+		winnerView.setId(WinnerView.winnerViewID);
 		root.getChildren().add(winnerView);
 		
 	}
@@ -154,7 +160,9 @@ public class TicTacToeController {
 	//Update the UI when a new game is created (or changed)
 	public void newGame()
 	{
-		System.out.println("Starting new game");
+		//System.out.println("Starting new game");
+		
+		root.getChildren().remove(root.lookup("#" + WinnerView.winnerViewID));
 		gameView.initializeGameCells();
 		appModel.setCurrentPlayer(appModel.getPlayer1());
 		game = new Game();

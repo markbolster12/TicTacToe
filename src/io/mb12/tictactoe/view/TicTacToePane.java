@@ -7,11 +7,13 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
-public class TicTacToePane extends GridPane {
+public class TicTacToePane extends StackPane {
 	
 	private ArrayList<GameCell> gameCells;
+	private GridPane gameGrid;
 	
 	public TicTacToePane()
 	{
@@ -22,6 +24,8 @@ public class TicTacToePane extends GridPane {
 	
 	public void initialize()
 	{
+		gameGrid = new GridPane();
+		
 		//Create column contraints
 		ColumnConstraints column1 = new ColumnConstraints();
 		column1.setPercentWidth(33.33);
@@ -29,7 +33,8 @@ public class TicTacToePane extends GridPane {
 		column2.setPercentWidth(33.33);
 		ColumnConstraints column3 = new ColumnConstraints();
 		column3.setPercentWidth(33.33);
-	    this.getColumnConstraints().addAll(column1, column2, column3);
+
+		gameGrid.getColumnConstraints().addAll(column1, column2, column3);
 	    
 	    //Create row contraints
 	    RowConstraints row1 = new RowConstraints();
@@ -38,8 +43,10 @@ public class TicTacToePane extends GridPane {
 	    row2.setPercentHeight(33.33);
 	    RowConstraints row3 = new RowConstraints();
 	    row3.setPercentHeight(33.33);
-	    this.getRowConstraints().addAll(row1, row2, row3);
 	    
+	    gameGrid.getRowConstraints().addAll(row1, row2, row3);
+	    
+	    this.getChildren().add(gameGrid);
 	    VBox.setVgrow(this, Priority.ALWAYS);
 	    
 	    this.setPadding(new Insets(10,10,10,10));
@@ -48,7 +55,7 @@ public class TicTacToePane extends GridPane {
 	public void initializeGameCells()
 	{
 		gameCells = new ArrayList<GameCell>();
-		this.getChildren().clear();
+		gameGrid.getChildren().clear();
 		
 		for(int y=0; y<3; y++)
 		{
@@ -63,7 +70,7 @@ public class TicTacToePane extends GridPane {
 			    cell.setX(x);
 			    cell.setY(y);
 			    
-			    this.getChildren().add(cell);
+			    gameGrid.getChildren().add(cell);
 			    gameCells.add(cell);
 			}
 		}
